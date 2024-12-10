@@ -5,13 +5,12 @@ import pyperclip
 
 # Titre et sous-titre
 st.title("Évaluateur de mot de passe")
-st.subheader("Découverte des fonctionnalités de Streamlit")
 
 # Texte d'introduction
-st.write("Bienvenue sur cette application interactive réalisée avec Streamlit. Explorez les différents composants ci-dessous.")
+st.write("Bienvenue sur cette application qui vous permet d'évaluer et de générer de mots de passe.")
 
 # Ajout d'une image
-st.image("image.png", caption="Image d'exemple")
+st.image("image.png", caption="Logo")
 
 score = 0
 mot_de_passe_longeur = False
@@ -136,8 +135,9 @@ while max and score < 10 :
         mot_de_passe = (generer_mot_de_passe(long, maj, min, num, spe))
 
 st.write(mot_de_passe)
-st.button(pyperclip.copy(mot_de_passe), icon = "📋")
-    
 
+if st.button("Copier") :
+    pyperclip.copy(mot_de_passe)
+    
 # Résultat final
 st.write("Merci d'avoir utilisé cette application. 🚀")
