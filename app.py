@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import random
-import pyperclip
 
 # Titre et sous-titre
 st.title("Évaluateur de mot de passe")
