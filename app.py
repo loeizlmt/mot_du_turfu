@@ -12,6 +12,24 @@ st.write("Bienvenue sur cette application interactive réalisée avec Streamlit.
 # Ajout d'une image
 st.image("image.png", caption="Image d'exemple")
 
+score = 0
+mot_de_passe_longeur = False
+scoremaj = False
+scoremin = False
+scorenum = False
+scorecaractère = False
+mots_interdits = False
+caractères = ["!", "@", "#",  "$", "%", "^", "&", "*", "(", ")"," ?", ";"]
+button_cliqué = False
+maj = False
+min =False
+maj = False
+min =False
+spe = False
+num =False
+long = 12
+max = False
+
 def generer_mot_de_passe(longueur=12, majuscules=True,
 minuscules=True, chiffres=True, speciaux=True):
 
@@ -30,25 +48,8 @@ minuscules=True, chiffres=True, speciaux=True):
     range(longueur))
 
 
-
-file  = open("mots_interdits.txt","r",encoding="utf8")
-lignes = file.readlines()
-
-# Zone de saisie
-mot_de_passe = st.text_input("Entrez votre mot de passe :", "")
-score = 0
-mot_de_passe_longeur = False
-scoremaj = False
-scoremin = False
-scorenum = False
-scorecaractère = False
-mots_interdits = False
-caractères = ["!", "@", "#",  "$", "%", "^", "&", "*", "(", ")"," ?", ";"]
-button_cliqué = False
-
-# Boutons interactifs
-if st.button("verrifier mon mot de passe"):
-    button_cliqué = True
+def score_mdp() : 
+    global score, mot_de_passe_longeur, scoremaj, scoremin, scorenum, scorecaractère, mots_interdits, caractères
     if len(mot_de_passe) >= 8:
         score += 2
     else : 
@@ -81,6 +82,18 @@ if st.button("verrifier mon mot de passe"):
                 score += -5
                 mots_interdits = True
 
+file  = open("mots_interdits.txt","r",encoding="utf8")
+lignes = file.readlines()
+
+# Zone de saisie
+mot_de_passe = st.text_input("Entrez votre mot de passe :", "")
+
+# Boutons interactifs
+if st.button("verrifier mon mot de passe"):
+    button_cliqué = True
+    score_mdp()
+if score > 10 :
+    score = 10
 # Curseur interactif
 valeur_curseur = st.slider("score de votre mot de passe :", 0, 10, score, disabled=True)
 st.write(f"Score de votre mot de passe : {valeur_curseur}")
@@ -101,9 +114,28 @@ if score < 7 and button_cliqué == True :
 if score >= 10 :
     st.write("Mot de passe très robuste !")
 
-
+st.write("Choisissez vos options pour générer le mot de passe :")
+if st.checkbox("majuscules") :
+    maj = True
+if st.checkbox("minuscules") :
+    min = True
+if st.checkbox("caractères spéciaux") :
+    spe = True
+if st.checkbox("chiffres") :
+    num = True
+long = st.text_input("Entrez le nombre de caractères souhaités :", "")
+long =  int(long)
+if maj and min and spe and num and long >= 12 :
+    max = True
 if st.button("générer un mot de passe") :
-    st.write(generer_mot_de_passe())
+    mot_de_passe = (generer_mot_de_passe(long, maj, min, num, spe))
+while max and score < 10 :
+    if max :
+        score_mdp()
+    if score < 10 :
+        mot_de_passe = (generer_mot_de_passe(long, maj, min, num, spe))
+
+st.write(mot_de_passe)
     
 
 # Résultat final
