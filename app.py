@@ -27,7 +27,7 @@ maj = False
 min =False
 spe = False
 num =False
-long = 12
+long = 0
 max = False
 
 def generer_mot_de_passe(longueur=12, majuscules=True,
@@ -123,7 +123,7 @@ if st.checkbox("caractères spéciaux") :
     spe = True
 if st.checkbox("chiffres") :
     num = True
-long = st.text_input("Entrez le nombre de caractères souhaités :", "")
+long = st.text_input("Entrez le nombre de caractères souhaités :", "12")
 long =  int(long)
 if maj and min and spe and num and long >= 12 :
     max = True
