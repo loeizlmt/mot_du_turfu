@@ -10,7 +10,7 @@ st.subheader("Découverte des fonctionnalités de Streamlit")
 st.write("Bienvenue sur cette application interactive réalisée avec Streamlit. Explorez les différents composants ci-dessous.")
 
 # Ajout d'une image
-st.image("https://via.placeholder.com/800x300.png?text=Image+d'exemple", caption="Image d'exemple")
+st.image("image.png", caption="Image d'exemple")
 
 file  = open("mots_interdits.txt","r",encoding="utf8")
 lignes = file.readlines()
