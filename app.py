@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-#import matplotlib.pyplot as plt
+import random
 
 # Titre et sous-titre
 st.title("Application Web avec Streamlit")
@@ -11,6 +11,25 @@ st.write("Bienvenue sur cette application interactive réalisée avec Streamlit.
 
 # Ajout d'une image
 st.image("image.png", caption="Image d'exemple")
+
+def generer_mot_de_passe(longueur=12, majuscules=True,
+minuscules=True, chiffres=True, speciaux=True):
+
+    caracteres = ""
+    if majuscules:
+        caracteres += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    if minuscules:
+        caracteres += "abcdefghijklmnopqrstuvwxyz"
+    if chiffres:
+        caracteres += "0123456789"
+    if speciaux:
+        caracteres += "!@#$%^&*()-_+=<>?/"
+    if not caracteres:
+        return "Sélectionnez au moins un type de caractère."
+    return "".join(random.choice(caracteres) for _ in
+    range(longueur))
+
+
 
 file  = open("mots_interdits.txt","r",encoding="utf8")
 lignes = file.readlines()
@@ -82,6 +101,10 @@ if score < 7 and button_cliqué == True :
 if score >= 10 :
     st.write("Mot de passe très robuste !")
 
+
+if st.button("générer un mot de passe") :
+    st.write(generer_mot_de_passe())
+    
 
 # Résultat final
 st.write("Merci d'avoir utilisé cette application. 🚀")
