@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import random
+import pyperclip
 
 # Titre et sous-titre
 st.title("Évaluateur de mot de passe")
@@ -135,6 +136,7 @@ while max and score < 10 :
         mot_de_passe = (generer_mot_de_passe(long, maj, min, num, spe))
 
 st.write(mot_de_passe)
+st.button(pyperclip.copy(mot_de_passe), icon = "📋")
     
 
 # Résultat final
