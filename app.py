@@ -3,7 +3,7 @@ import pandas as pd
 import random
 
 # Titre et sous-titre
-st.title("Application Web avec Streamlit")
+st.title("Évaluateur de mot de passe")
 st.subheader("Découverte des fonctionnalités de Streamlit")
 
 # Texte d'introduction
@@ -89,14 +89,14 @@ lignes = file.readlines()
 mot_de_passe = st.text_input("Entrez votre mot de passe :", "")
 
 # Boutons interactifs
-if st.button("verrifier mon mot de passe"):
+if st.button("évaluer mon mot de passe"):
     button_cliqué = True
     score_mdp()
 if score > 10 :
     score = 10
 # Curseur interactif
-valeur_curseur = st.slider("score de votre mot de passe :", 0, 10, score, disabled=True)
-st.write(f"Score de votre mot de passe : {valeur_curseur}")
+valeur_curseur = st.slider("Note de votre mot de passe :", 0, 10, score, disabled=True)
+st.write(f"Note de votre mot de passe : {valeur_curseur}")
 
 if score < 7 and button_cliqué == True :
     if mots_interdits :
@@ -123,8 +123,7 @@ if st.checkbox("caractères spéciaux") :
     spe = True
 if st.checkbox("chiffres") :
     num = True
-long = st.text_input("Entrez le nombre de caractères souhaités :", "12")
-long =  int(long)
+long = st.slider("Entrez le nombre de caractères souhaités :", 0, 50)
 if maj and min and spe and num and long >= 12 :
     max = True
 if st.button("générer un mot de passe") :
