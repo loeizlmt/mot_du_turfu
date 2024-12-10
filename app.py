@@ -133,10 +133,8 @@ while max and score < 10 :
         score_mdp()
     if score < 10 :
         mot_de_passe = (generer_mot_de_passe(long, maj, min, num, spe))
-
-st.write(mot_de_passe)
-
-st.button("Copier", on_click= pyperclip.copy(mot_de_passe))
+st.write("voici votre mot de passe sécurisé que vous pouvez copier")
+st.code(mot_de_passe)
     
 # Résultat final
 st.write("Merci d'avoir utilisé cette application. 🚀")
