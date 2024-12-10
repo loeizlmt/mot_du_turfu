@@ -136,8 +136,7 @@ while max and score < 10 :
 
 st.write(mot_de_passe)
 
-if st.button("Copier") :
-    pyperclip.copy(mot_de_passe)
+st.button("Copier", on_click= pyperclip.copy(mot_de_passe))
     
 # Résultat final
 st.write("Merci d'avoir utilisé cette application. 🚀")
