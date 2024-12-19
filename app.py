@@ -11,7 +11,7 @@ st.write("Bienvenue sur cette application qui vous permet d'évaluer et de gén�
 # Ajout d'une image
 st.image("image.png", caption="Logo")
 
-mot_de_passe_gen= ""
+mot_de_passe_gen= "0"
 score = 0
 mot_de_passe_longeur = False
 scoremaj = False
