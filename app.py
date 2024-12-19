@@ -127,7 +127,7 @@ long = st.slider("Entrez le nombre de caractères souhaités :", 0, 50)
 if maj and min and spe and num and long >= 12 :
     max = True
 if st.button("générer un mot de passe") :
-    mot_de_passe = (generer_mot_de_passe(long, maj, min, num, spe))
+    mot_de_passe_gen = (generer_mot_de_passe(long, maj, min, num, spe))
 while max and score < 10 :
     if max :
         score_mdp()
