@@ -1,5 +1,6 @@
 import streamlit as st
 import random
+from streamlit.components.v1 import html
 
 # Titre et sous-titre
 st.title("Évaluateur de mot de passe")
@@ -28,7 +29,7 @@ min =False
 spe = False
 num =False
 long = 0
-max = False
+js_activé = False
 
 import random
 
@@ -48,7 +49,6 @@ def generer_mot_de_passe(longueur, majuscules, minuscules, chiffres, speciaux):
 
     if not caracteres_maj and not caracteres_min and not chiffres_générateur and not spéciaux_générateur:
         return "Sélectionnez au moins un type de caractère."
-
     mot_de_passe = []
     if majuscules:
         mot_de_passe.append(random.choice(caracteres_maj))
@@ -143,12 +143,23 @@ if st.checkbox("caractères spéciaux") :
 if st.checkbox("chiffres") :
     num = True
 long = st.slider("Entrez le nombre de caractères souhaités :", 0, 50)
-if maj and min and spe and num and long >= 12 :
-    max = True
+
 if st.button("générer un mot de passe") :
     mot_de_passe_gen = (generer_mot_de_passe(long, maj, min, num, spe))
+    if not maj or not min or not num or not spe:
+        # déclaration du javascript
+        my_js = """
+        alert("Attention, vous n'avez pas sélectionné tous les types de caractères, votre mot de passe ne pourra donc pas avoir le score maximal.");
+        """ 
+        # création du html avec le javascript intégré
+        my_html = f"<script>{my_js}</script>"
+        js_activé = True
 st.write("voici votre mot de passe sécurisé que vous pouvez copier")
 st.code(mot_de_passe_gen)
 
 # Résultat final
 st.write("Merci d'avoir utilisé cette application. 🚀")
+
+if js_activé:
+    #execution du html ici pour ne pas créer un espace vide entre le bouton et le mot de passe généré
+    html(my_html)
