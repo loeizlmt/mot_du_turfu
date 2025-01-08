@@ -1,5 +1,4 @@
 import streamlit as st
-import pandas as pd
 import random
 
 # Titre et sous-titre
@@ -11,12 +10,13 @@ st.write("Bienvenue sur cette application qui vous permet d'évaluer et de gén�
 # Ajout d'une image
 st.image("image.png", caption="Logo")
 
-mot_de_passe_gen= ""
-score = 0
-mot_de_passe_longeur = False
+# déclaration des variables
+mot_de_passe_gen= "" # mot de passe généré
+score = 0 # score du mot de passe
+mot_de_passe_longeur = False #
 scoremaj = False
 scoremin = False
-scorenum = False
+scorenum = False   
 scorecaractère = False
 mots_interdits = False
 caractères = ["!", "@", "#",  "$", "%", "^", "&", "*", "(", ")"," ?", ";"]
@@ -30,22 +30,41 @@ num =False
 long = 0
 max = False
 
-def generer_mot_de_passe(longueur=12, majuscules=True,
-minuscules=True, chiffres=True, speciaux=True):
+import random
 
-    caracteres = ""
-    if majuscules:
-        caracteres += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    if minuscules:
-        caracteres += "abcdefghijklmnopqrstuvwxyz"
-    if chiffres:
-        caracteres += "0123456789"
-    if speciaux:
-        caracteres += "!@#$%^&*()-_+=<>?/"
-    if not caracteres:
+def generer_mot_de_passe(longueur, majuscules, minuscules, chiffres, speciaux):
+    if majuscules :
+        caracteres_maj = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" 
+    else : caracteres_maj = ""
+    if minuscules :
+        caracteres_min = "abcdefghijklmnopqrstuvwxyz"  
+    else: caracteres_min = ""
+    if chiffres :
+        chiffres_générateur = "0123456789"  
+    else: chiffres_générateur = ""
+    if speciaux :
+        spéciaux_générateur = "!@#$%^&*()-_+=<>?/"  
+    else : spéciaux_générateur = ""
+
+    if not caracteres_maj and not caracteres_min and not chiffres_générateur and not spéciaux_générateur:
         return "Sélectionnez au moins un type de caractère."
-    return "".join(random.choice(caracteres) for _ in
-    range(longueur))
+
+    mot_de_passe = []
+    if majuscules:
+        mot_de_passe.append(random.choice(caracteres_maj))
+    if minuscules:
+        mot_de_passe.append(random.choice(caracteres_min))
+    if chiffres:
+        mot_de_passe.append(random.choice(chiffres_générateur))
+    if speciaux:
+        mot_de_passe.append(random.choice(spéciaux_générateur))
+
+    tous_caracteres = caracteres_maj + caracteres_min + chiffres_générateur + spéciaux_générateur
+    mot_de_passe += [random.choice(tous_caracteres) for _ in range(longueur - len(mot_de_passe))]
+    return ''.join(mot_de_passe)
+    
+
+
 
 
 def score_mdp() : 
@@ -128,13 +147,8 @@ if maj and min and spe and num and long >= 12 :
     max = True
 if st.button("générer un mot de passe") :
     mot_de_passe_gen = (generer_mot_de_passe(long, maj, min, num, spe))
-while max and score < 10 :
-    if max :
-        score_mdp()
-    if score < 10 :
-        mot_de_passe_gen = (generer_mot_de_passe(long, maj, min, num, spe))
 st.write("voici votre mot de passe sécurisé que vous pouvez copier")
 st.code(mot_de_passe_gen)
-    
+
 # Résultat final
 st.write("Merci d'avoir utilisé cette application. 🚀")
