@@ -196,7 +196,7 @@ st.write("voici votre mot de passe sécurisé que vous pouvez copier")
 st.code(mot_de_passe_gen)
 
 # message de fin
-st.write("Merci d'avoir utilisé cette application. 🚀")
+st.write("Merci d'avoir utilisé cette application. 🔑")
 
 # si le javascript a été activé on l'éxécute
 if js_activé:
